@@ -21,6 +21,7 @@ function setupNavigation() {
 document.addEventListener('DOMContentLoaded', () => {
     setupNavigation();
     loadPosts();  // Load posts when we click on navbar: feed
+    loadConversations() // Load conversation when we click on navbar: messagerie
     loadFriends();  // Load friends list we click on navbar: amis
 });
 
@@ -213,6 +214,110 @@ function viewImageFullScreen(imageSrc) {
     // Close full-screen view on click
     overlay.addEventListener('click', () => document.body.removeChild(overlay));
 }
+
+// Sample data to simulate an API response for conversations
+const conversationsData = [
+    {
+        id: 1,
+        name: "Alice Dupont",
+        profileImage: "images/alice.jpg",
+        messages: [
+            { sender: "Alice", content: "Salut! Comment ça va?", timestamp: "10:30" },
+            { sender: "Véronica", content: "Très bien, et toi?", timestamp: "10:32" }
+        ]
+    },
+    {
+        id: 2,
+        name: "Jean Martin",
+        profileImage: "images/jean.jpg",
+        messages: [
+            { sender: "Jean", content: "Prêt pour la réunion?", timestamp: "11:00" },
+            { sender: "Véronica", content: "Oui, à bientôt!", timestamp: "11:02" }
+        ]
+    }
+];
+
+// Display the list of conversations
+function loadConversations() {
+    const conversationsContainer = document.querySelector('.conversations-container');
+    conversationsData.forEach(conversation => {
+        const conversationElement = document.createElement('div');
+        conversationElement.className = 'conversation';
+        
+        // Profile image
+        const profileImage = document.createElement('img');
+        profileImage.src = conversation.profileImage;
+        profileImage.className = 'conversation-profile-pic';
+        
+        // Name and last message
+        const details = document.createElement('div');
+        details.className = 'conversation-details';
+        details.innerHTML = `<strong>${conversation.name}</strong><br><span>${getLastMessage(conversation).content}</span>`;
+        
+        conversationElement.appendChild(profileImage);
+        conversationElement.appendChild(details);
+        
+        // Show message history on click
+        conversationElement.addEventListener('click', () => loadConversationHistory(conversation));
+        
+        conversationsContainer.appendChild(conversationElement);
+    });
+}
+
+// Get the last message of a conversation
+function getLastMessage(conversation) {
+    return conversation.messages[conversation.messages.length - 1];
+}
+
+// Load the full conversation history
+function loadConversationHistory(conversation) {
+    const messageDetails = document.querySelector('.message-details');
+    messageDetails.innerHTML = '';  // Clear previous content
+
+    conversation.messages.forEach(msg => {
+        const messageElement = document.createElement('div');
+        messageElement.className = `message ${msg.sender === 'Véronica' ? 'outgoing' : 'incoming'}`;
+        
+        // Profile image, name, timestamp, and content
+        if (msg.sender !== 'Véronica') {
+            const profileImage = document.createElement('img');
+            profileImage.src = conversation.profileImage;
+            profileImage.className = 'message-profile-pic';
+            messageElement.appendChild(profileImage);
+        }
+
+        const messageContent = document.createElement('div');
+        messageContent.className = 'message-content';
+        messageContent.innerHTML = `<p>${msg.content}</p><span>${msg.timestamp}</span>`;
+        
+        messageElement.appendChild(messageContent);
+        messageDetails.appendChild(messageElement);
+    });
+
+    // Add a field for new message input
+    const inputField = document.createElement('input');
+    inputField.type = 'text';
+    inputField.placeholder = 'Écrire un message...';
+    inputField.className = 'message-input';
+    inputField.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter' && inputField.value.trim()) {
+            sendMessage(conversation, inputField.value.trim());
+            inputField.value = '';
+        }
+    });
+    
+    messageDetails.appendChild(inputField);
+}
+
+// Send a new message and update JSON and UI
+function sendMessage(conversation, content) {
+    const newMessage = { sender: "Véronica", content: content, timestamp: new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'}) };
+    conversation.messages.push(newMessage);
+    
+    loadConversationHistory(conversation);  // Refresh to display the new message
+}
+
+
 
 // Friends list
 const friendsData = [

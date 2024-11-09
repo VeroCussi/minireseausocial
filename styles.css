@@ -243,6 +243,91 @@ body {
   display: none;
 }
 
+.conversation {
+  padding: 15px;
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+  border-radius: 15px;
+  background-color: #e0e0e0;
+  box-shadow: 8px 8px 15px #bebebe, -8px -8px 15px #ffffff;
+  cursor: pointer;
+  transition: transform 0.2s;
+  }
+
+.conversation:hover {
+    transform: scale(1.03);
+  }
+  
+  .conversation-profile-pic, .message-profile-pic {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    box-shadow: 3px 3px 10px #bebebe, -3px -3px 10px #ffffff;
+    margin-right: 10px;
+  }
+
+  .conversation-details {
+    color: #666;
+  }
+
+  .conversation:active {
+    box-shadow: inset 5px 5px 10px #bebebe, inset -5px -5px 10px #ffffff;
+  }
+  
+  .message {
+    display: flex;
+    margin-bottom: 15px;
+    align-items: flex-end;
+    max-width: 75%;
+  }
+  
+  .message.incoming .message-content {
+    background-color: #e0e0e0;
+    align-self: flex-start;
+  }
+  
+  .message.outgoing .message-content {
+    background-color: #d1f7c4;
+    align-self: flex-end;
+  }
+  
+  .message-content {
+    padding: 12px 20px;
+    border-radius: 20px;
+    background-color: #e0e0e0;
+    color: #555;
+    box-shadow: inset 4px 4px 8px #bebebe, inset -4px -4px 8px #ffffff;
+    font-size: 0.95rem;
+  }
+
+  .message.incoming .message-content {
+    background-color: #f0f0f0;
+    box-shadow: 4px 4px 8px #bebebe, -4px -4px 8px #ffffff;
+  }
+  
+  .message.outgoing .message-content {
+    background-color: #d1f7c4;
+    box-shadow: 4px 4px 8px #bebebe, -4px -4px 8px #ffffff;
+  }
+  
+  .message-input {
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    border-radius: 20px;
+    border: none;
+    background-color: #e0e0e0;
+    box-shadow: inset 4px 4px 8px #bebebe, inset -4px -4px 8px #ffffff;
+    color: #666;
+    font-size: 1rem;
+  }
+  
+  .message-input::placeholder {
+    color: #aaa;
+  }
+  
+
 /* Friend List styles */
 .friend-list {
   list-style: none;
