@@ -1,3 +1,28 @@
+:root {
+    --primary-light: #8abdff;
+    --primary: #6d5dfc;
+    --primary-dark: #5b0eeb;
+    
+    --white: #FFFFFF;
+    --greyLight-1: #E4EBF5;
+    --greyLight-2: #c8d0e7;
+    --greyLight-3: #bec8e4;
+    --greyDark: #64708e;
+  }
+  
+  .shadow {
+    box-shadow: 0.3rem 0.3rem 0.6rem var(--greyLight-2), -0.2rem -0.2rem 0.5rem var(--white);
+  }
+  
+  .inner-shadow {
+    box-shadow: inset 0.2rem 0.2rem 0.5rem var(--greyLight-2), inset -0.2rem -0.2rem 0.5rem var(--white);
+  }
+
+  input:focus {
+    outline: none;
+  }
+
+
 /* Basic reset */
 * {
   margin: 0;
@@ -7,7 +32,7 @@
 
 body {
   font-family: Arial, sans-serif;
-  background-color: #e0e0e0;
+  background-color: var(--greyLight-1);
 }
 
 h2 {
@@ -19,12 +44,12 @@ h2 {
   display: flex;
   justify-content: space-around;
   padding: 15px;
-  background-color: #e0e0e0;
-  box-shadow: 5px 5px 15px #bebebe, -5px -5px 15px #ffffff;
+  background-color: var(--greyLight-1);
+  box-shadow: 0.3rem 0.3rem 0.6rem var(--greyLight-2), -0.2rem -0.2rem 0.5rem var(--white);
 }
 
 .nav-link {
-  color: #333;
+  color: var(--primary-dark);
   text-decoration: none;
   font-weight: bold;
 }
@@ -38,7 +63,7 @@ h2 {
   display: block;
 }
 
-/* Content sections */
+/* Feed sections */
 .section {
   padding: 20px;
   display: none;
@@ -57,11 +82,11 @@ h2 {
 
 /* Post styles */
 .post {
-  background-color: #e0e0e0;
-  border-radius: 15px;
+  background-color: --greyLight-1;
+  border-radius: 10px;
   padding: 20px;
   margin-bottom: 20px;
-  box-shadow: 8px 8px 15px #bebebe, -8px -8px 15px #ffffff;
+  box-shadow: 0.3rem 0.3rem 0.6rem var(--greyLight-2), -0.2rem -0.2rem 0.5rem var(--white);
 }
 
 .post-content {
@@ -75,7 +100,7 @@ h2 {
   height: auto;
   border-radius: 10px;
   margin: 10px 0;
-  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0.3rem 0.3rem 0.6rem var(--greyLight-2), -0.2rem -0.2rem 0.5rem var(--white);
   cursor: pointer;
 }
 
@@ -94,8 +119,8 @@ h2 {
 }
 
 .full-screen-image {
-  max-width: 90%;
-  max-height: 90%;
+  max-width: 100%;
+  max-height: 100%;
   border-radius: 10px;
   box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.2);
 }
@@ -112,22 +137,23 @@ h2 {
   border: none;
   cursor: pointer;
   font-weight: bold;
-  box-shadow: 5px 5px 10px #bebebe, -5px -5px 10px #ffffff;
-  background-color: #e0e0e0;
+  color: var(--primary);
+  box-shadow: 0.3rem 0.3rem 0.6rem var(--greyLight-2), -0.2rem -0.2rem 0.5rem var(--white);
+  background-color: var(--greyLight-1);
   transition: background 0.3s;
 }
 
 .reaction:hover {
-  background-color: #f0f0f0;
+  background-color: var(--greyLight-2);
 }
 
 /* Styles for the "A quoi penses-tu?" box */
 .new-post {
-  background-color: #e0e0e0;
-  border-radius: 15px;
+  background-color:--greyLight-1;
+  border-radius: 10px;
   padding: 15px;
   margin: 20px 0;
-  box-shadow: 8px 8px 15px #bebebe, -8px -8px 15px #ffffff;
+  box-shadow: 0.3rem 0.3rem 0.6rem var(--greyLight-2), -0.2rem -0.2rem 0.5rem var(--white);
 }
 
 /* Style for the text input and profile picture */
@@ -142,25 +168,25 @@ h2 {
   height: 40px;
   border-radius: 50%;
   margin-right: 10px;
-  box-shadow: 5px 5px 10px #bebebe, -5px -5px 10px #ffffff;
+  box-shadow: 0.3rem 0.3rem 0.6rem var(--greyLight-2), -0.2rem -0.2rem 0.5rem var(--white);
 }
 
 .new-post-input input {
   width: 100%;
-  padding: 10px;
-  border-radius: 20px;
+  padding: 12px;
+  border-radius: 10px;
   border: none;
-  background-color: #f0f0f0;
-  box-shadow: inset 3px 3px 8px #bebebe, inset -3px -3px 8px #ffffff;
+  background-color: var(--greyLight-1);
+  box-shadow: inset 3px 3px 8px var(--greyLight-2), inset -3px -3px 8px var(--white);
   font-size: 1rem;
-  color: #666;
+  color: var(--greyDark);
 }
 
 .new-post-options {
   display: flex;
   justify-content: space-around;
   padding-top: 10px;
-  border-top: 1px solid #ddd;
+  border-top: 1px solid var(--greyLight-1);
 }
 
 .option-btn {
@@ -169,16 +195,16 @@ h2 {
   border: none;
   background: none;
   font-size: 0.9rem;
-  color: #555;
+  color: var(--primary);
   cursor: pointer;
   padding: 10px;
   border-radius: 10px;
-  box-shadow: 3px 3px 5px #bebebe, -3px -3px 5px #ffffff;
+  box-shadow: 0.3rem 0.3rem 0.6rem var(--greyLight-2), -0.2rem -0.2rem 0.5rem var(--white);
   transition: background 0.3s;
 }
 
 .option-btn:hover {
-  background-color: #f0f0f0;
+  background-color: var(--greyLight-2);
 }
 
 .option-btn .icon {
@@ -190,17 +216,21 @@ h2 {
 .comment-section {
   margin-top: 15px;
   padding-top: 10px;
-  border-top: 1px solid #ddd;
+  border-top: 1px solid var(--greyLight-2);
 }
 
 .comment-input {
   display: flex;
   align-items: center;
-  background-color: #f0f0f0;
-  border-radius: 10px;
-  padding: 10px;
-  box-shadow: inset 2px 2px 6px #bebebe, inset -3px -3px 8px #ffffff;
+  margin-bottom: 10px;
   width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  background-color: var(--greyLight-1);
+  box-shadow: inset 3px 3px 8px var(--greyLight-2), inset -3px -3px 8px var(--white);
+  font-size: 1rem;
+  color: var(--greyDark);
 }
 
 .comments-list {
@@ -208,34 +238,35 @@ h2 {
 }
 
 .comment {
-  background-color: #f0f0f0;
+  background-color: var(--greyLight-1);
   padding: 8px;
   border-radius: 10px;
   margin-bottom: 8px;
-  box-shadow: 3px 3px 5px #bebebe, -3px -3px 5px #ffffff;
+  box-shadow: 0.3rem 0.3rem 0.6rem var(--greyLight-2), -0.2rem -0.2rem 0.5rem var(--white);
 }
 
 .comment-text {
   font-size: 0.9rem;
-  color: #555;
+  color: var(--greyDark);
 }
 
 .reply-button {
   background: none;
   border: none;
-  color: #007bff;
+  color: var(--primary);
   font-size: 0.8rem;
   cursor: pointer;
   margin-top: 5px;
 }
 
 .reply-input {
+  background-color: var(--greyLight-1);
   width: 100%;
   padding: 5px;
-  border-radius: 8px;
+  border-radius: 10px;
   border: none;
   margin-top: 5px;
-  box-shadow: inset 2px 2px 5px #bebebe, inset -2px -2px 5px #ffffff;
+  box-shadow: inset 0.2rem 0.2rem 0.5rem var(--greyLight-2), inset -0.2rem -0.2rem 0.5rem var(--white);
 }
 
 .replies-list {
@@ -260,9 +291,9 @@ h2 {
   margin: 10px 0;
   display: flex;
   align-items: center;
-  border-radius: 15px;
-  background-color: #e0e0e0;
-  box-shadow: 8px 8px 15px #bebebe, -8px -8px 15px #ffffff;
+  border-radius: 10px;
+  background-color: var(--greyLight-1);
+  box-shadow: 0.3rem 0.3rem 0.6rem var(--greyLight-2), -0.2rem -0.2rem 0.5rem var(--white);
   cursor: pointer;
   transition: transform 0.2s;
   }
@@ -272,8 +303,7 @@ h2 {
   }
 
 .active-conversation {
-  background-color: #d1f7c4;
-  box-shadow: inset 5px 5px 10px #bebebe, inset -5px -5px 10px #ffffff;
+  background-color: var(--greyLight-3);
   transition: background-color 0.3s, transform 0.2s;
   }
   
@@ -281,16 +311,16 @@ h2 {
     width: 45px;
     height: 45px;
     border-radius: 50%;
-    box-shadow: 3px 3px 10px #bebebe, -3px -3px 10px #ffffff;
+    box-shadow: 0.3rem 0.3rem 0.6rem var(--greyLight-2), -0.2rem -0.2rem 0.5rem var(--white);
     margin-right: 10px;
   }
 
   .conversation-details {
-    color: #666;
+    color: var(--greyDark);
   }
 
   .conversation:active {
-    box-shadow: inset 5px 5px 10px #bebebe, inset -5px -5px 10px #ffffff;
+    box-shadow: 0.3rem 0.3rem 0.6rem var(--greyLight-2), -0.2rem -0.2rem 0.5rem var(--white);
   }
   
   .message {
@@ -305,14 +335,18 @@ h2 {
     width: 90%;
     max-width: 600px;
     margin: auto;
-    background-color: #e0e0e0;
-    border-radius: 15px;
+    background-color: var(--greyLight-1);
+    border-radius: 10px;
     padding: 20px;
-    box-shadow: 8px 8px 15px #bebebe, -8px -8px 15px #ffffff;
+    box-shadow: 0.3rem 0.3rem 0.6rem var(--greyLight-2), -0.2rem -0.2rem 0.5rem var(--white);
   }
 
   .message.incoming {
-    align-self: flex-end; 
+    align-self: flex-end;
+  }
+
+  .incoming .message-content {
+    background-color: var(--greyLight-3);
   }
 
   .message.outgoing {
@@ -323,61 +357,30 @@ h2 {
 
   .message-content {
     padding: 12px 20px;
-    border-radius: 20px;
-    background-color: #e0e0e0;
-    color: #555;
-    box-shadow: inset 4px 4px 8px #bebebe, inset -4px -4px 8px #ffffff;
+    border-radius: 10px;
+    color: var(--greyDark);
+    box-shadow: 0.3rem 0.3rem 0.6rem var(--greyLight-2), -0.2rem -0.2rem 0.5rem var(--white);
     font-size: 0.95rem;
-  }
-  
-  .message.outgoing .message-content {
-    background-color: #d1f7c4;
-
-  }
-  
-  .message-content {
-    padding: 12px 20px;
-    border-radius: 20px;
-    background-color: #e0e0e0;
-    color: #555;
-    box-shadow: inset 4px 4px 8px #bebebe, inset -4px -4px 8px #ffffff;
-    font-size: 0.95rem;
-  }
-
-  .message.incoming .message-content {
-    background-color: #f0f0f0;
-    box-shadow: 4px 4px 8px #bebebe, -4px -4px 8px #ffffff;
-  }
-
-  .message.incoming .message-content {
-    background-color: #f0f0f0;
-    box-shadow: 4px 4px 8px #bebebe, -4px -4px 8px #ffffff;
-  }
-  
-  .message.outgoing .message-content {
-    background-color: #d1f7c4;
-    box-shadow: 4px 4px 8px #bebebe, -4px -4px 8px #ffffff;
   }
   
   .message-input {
     width: 100%;
     padding: 12px;
     margin-top: 15px;
-    border-radius: 20px;
+    border-radius: 10px;
     border: none;
-    background-color: #e0e0e0;
-    box-shadow: inset 4px 4px 8px #bebebe, inset -4px -4px 8px #ffffff;
-    color: #666;
+    background-color: var(--greyLight-1);
+    box-shadow: inset 0.2rem 0.2rem 0.5rem var(--greyLight-2), inset -0.2rem -0.2rem 0.5rem var(--white);
+    color: var(--greyDark);
     font-size: 1rem;
   }
   
   .message-input::placeholder {
-    color: #aaa;
+    color: var(--greyDark);
   }
   
 
 /* Friend Section */
-
 .friend-container {
     width: 90%;
     max-width: 600px;
@@ -393,64 +396,69 @@ h2 {
 .friend-item {
   padding: 15px;
   margin: 10px 0;
-  background-color: #e0e0e0;
+  background-color: var(--greyLight-1);
   border-radius: 10px;
-  box-shadow: 4px 4px 8px #bebebe, -4px -4px 8px #ffffff;
+  box-shadow: 0.3rem 0.3rem 0.6rem var(--greyLight-2), -0.2rem -0.2rem 0.5rem var(--white);
   display: flex;
+  justify-content: space-between;
   align-items: center;
   cursor: grab;
+  transition: transform 0.2s;
 }
+
+.friend-item:hover {
+    transform: scale(1.03);
+  }
 
 .friend-profile-pic {
   width: 40px;
   height: 40px;
   border-radius: 50%;
   margin-right: 10px;
-  box-shadow: 2px 2px 4px #bebebe, -2px -2px 4px #ffffff;
+  box-shadow: 0.3rem 0.3rem 0.6rem var(--greyLight-2), -0.2rem -0.2rem 0.5rem var(--white);
 }
 
 .friend-details {
   flex: 1;
   font-weight: bold;
-  color: #333;
+  color: var(--greyDark);
 }
 
 .friend-item.dragging {
-    opacity: 0.5;
-    box-shadow: inset 2px 2px 5px #bebebe, inset -2px -2px 5px #ffffff;
+    box-shadow: inset 0.2rem 0.2rem 0.5rem var(--greyLight-2), inset -0.2rem -0.2rem 0.5rem var(--white);
 }
 
 .friend-link {
   text-decoration: none;
-  color: #333;
+  color: var(--primary);
   font-weight: bold;
 }
 
 #friend-search {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     margin: 15px 0;
     border-radius: 10px;
     border: none;
-    background-color: #e0e0e0;
-    box-shadow: inset 3px 3px 8px #bebebe, inset -3px -3px 8px #ffffff;
-    color: #333;
+    background-color: var(--greyLight-1);
+    box-shadow: inset 0.2rem 0.2rem 0.5rem var(--greyLight-2), inset -0.2rem -0.2rem 0.5rem var(--white);
+    color: var(--greyDark);
     font-size: 1rem;
   }
 
   .start-message-button {
     padding: 10px 20px;
     margin-top: 15px;
-    background-color: #007bff;
-    color: white;
+    background-color: var(--primary-light);
+    color: var(--white);
     border: none;
-    border-radius: 5px;
+    border-radius: 10px;
     cursor: pointer;
-    box-shadow: 4px 4px 8px #bebebe, -4px -4px 8px #ffffff;
+    box-shadow: 0.3rem 0.3rem 0.6rem var(--greyLight-2), -0.2rem -0.2rem 0.5rem var(--white);
     transition: background-color 0.3s;
   }
   
   .start-message-button:hover {
-    background-color: #0056b3;
+    background-color: var(--greyLight-3);
   }
   
