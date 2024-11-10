@@ -10,6 +10,10 @@ body {
   background-color: #e0e0e0;
 }
 
+h2 {
+    text-align: center;
+}
+
 /* Navigation bar */
 .navbar {
   display: flex;
@@ -243,6 +247,14 @@ body {
   display: none;
 }
 
+/* Conversation Section */
+
+.conversations-container {
+    width: 90%;
+    max-width: 600px;
+    margin: auto;
+  }
+
 .conversation {
   padding: 15px;
   margin: 10px 0;
@@ -256,7 +268,13 @@ body {
   }
 
 .conversation:hover {
-    transform: scale(1.03);
+  transform: scale(1.03);
+  }
+
+.active-conversation {
+  background-color: #d1f7c4;
+  box-shadow: inset 5px 5px 10px #bebebe, inset -5px -5px 10px #ffffff;
+  transition: background-color 0.3s, transform 0.2s;
   }
   
   .conversation-profile-pic, .message-profile-pic {
@@ -278,18 +296,43 @@ body {
   .message {
     display: flex;
     margin-bottom: 15px;
-    align-items: flex-end;
-    max-width: 75%;
+    align-items: center;
+    
   }
-  
-  .message.incoming .message-content {
+
+  .message-details {
+    display: none;
+    width: 90%;
+    max-width: 600px;
+    margin: auto;
     background-color: #e0e0e0;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 8px 8px 15px #bebebe, -8px -8px 15px #ffffff;
+  }
+
+  .message.incoming {
+    align-self: flex-end; 
+  }
+
+  .message.outgoing {
     align-self: flex-start;
+    flex-direction: row-reverse;
+    justify-content: flex-start;
+  }
+
+  .message-content {
+    padding: 12px 20px;
+    border-radius: 20px;
+    background-color: #e0e0e0;
+    color: #555;
+    box-shadow: inset 4px 4px 8px #bebebe, inset -4px -4px 8px #ffffff;
+    font-size: 0.95rem;
   }
   
   .message.outgoing .message-content {
     background-color: #d1f7c4;
-    align-self: flex-end;
+
   }
   
   .message-content {
@@ -299,6 +342,11 @@ body {
     color: #555;
     box-shadow: inset 4px 4px 8px #bebebe, inset -4px -4px 8px #ffffff;
     font-size: 0.95rem;
+  }
+
+  .message.incoming .message-content {
+    background-color: #f0f0f0;
+    box-shadow: 4px 4px 8px #bebebe, -4px -4px 8px #ffffff;
   }
 
   .message.incoming .message-content {

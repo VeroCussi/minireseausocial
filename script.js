@@ -177,7 +177,6 @@ function createCommentElement(comment) {
     return commentDiv;
 }
 
-
 // Function to handle reactions to a post
 function handleReaction(post, reactionType, button) {
     // Increase reaction count in the JSON data
@@ -234,35 +233,60 @@ const conversationsData = [
             { sender: "Jean", content: "Prêt pour la réunion?", timestamp: "11:00" },
             { sender: "Véronica", content: "Oui, à bientôt!", timestamp: "11:02" }
         ]
+    },
+    {
+        id: 3,
+        name: "Marie Curie",
+        profileImage: "images/avatar.jpg",
+        messages: [
+            { sender: "Marie", content: "Bonjour Véronica, as-tu eu le temps de revoir les notes de notre dernière réunion?", timestamp: "09:00" },
+            { sender: "Véronica", content: "Salut Marie, oui, j'ai parcouru toutes les notes. Il y a des points intéressants à approfondir.", timestamp: "09:05" },
+            { sender: "Marie", content: "Parfait! J'aimerais qu'on se concentre sur la partie de l'expérience initiale.", timestamp: "09:10" },
+            { sender: "Véronica", content: "Je suis d'accord. Je pense que cela pourrait vraiment améliorer nos résultats.", timestamp: "09:12" },
+            { sender: "Marie", content: "Est-ce que tu as eu des idées pour les tests que nous pourrions faire?", timestamp: "09:15" },
+            { sender: "Véronica", content: "Oui, j'ai pensé à quelques variations que l'on pourrait essayer. Je te montrerai mes idées lors de notre prochaine réunion.", timestamp: "09:18" },
+            { sender: "Marie", content: "Ça me semble bien. Merci pour ton travail, Véronica!", timestamp: "09:20" },
+            { sender: "Véronica", content: "Avec plaisir, Marie! C'est toujours un plaisir de travailler sur ces projets avec toi.", timestamp: "09:22" },
+            { sender: "Marie", content: "À très bientôt alors!", timestamp: "09:23" }
+        ]
     }
 ];
 
 // Display the list of conversations
 function loadConversations() {
     const conversationsContainer = document.querySelector('.conversations-container');
+    conversationsContainer.innerHTML = '';  // Clear previous content
     conversationsData.forEach(conversation => {
         const conversationElement = document.createElement('div');
         conversationElement.className = 'conversation';
-        
+        conversationElement.id = `conversation-${conversation.id}`;
+
         // Profile image
         const profileImage = document.createElement('img');
         profileImage.src = conversation.profileImage;
         profileImage.className = 'conversation-profile-pic';
-        
+
         // Name and last message
         const details = document.createElement('div');
         details.className = 'conversation-details';
         details.innerHTML = `<strong>${conversation.name}</strong><br><span>${getLastMessage(conversation).content}</span>`;
-        
+
         conversationElement.appendChild(profileImage);
         conversationElement.appendChild(details);
-        
+
         // Show message history on click
-        conversationElement.addEventListener('click', () => loadConversationHistory(conversation));
-        
+        conversationElement.addEventListener('click', () => {
+            // Remove active class from other conversations
+            document.querySelectorAll('.conversation').forEach(conv => conv.classList.remove('active-conversation'));
+            // Add active class to selected conversation
+            conversationElement.classList.add('active-conversation');
+            loadConversationHistory(conversation);
+        });
+
         conversationsContainer.appendChild(conversationElement);
     });
 }
+
 
 // Get the last message of a conversation
 function getLastMessage(conversation) {
@@ -272,12 +296,13 @@ function getLastMessage(conversation) {
 // Load the full conversation history
 function loadConversationHistory(conversation) {
     const messageDetails = document.querySelector('.message-details');
-    messageDetails.innerHTML = '';  // Clear previous content
+    messageDetails.innerHTML = '';
 
     conversation.messages.forEach(msg => {
         const messageElement = document.createElement('div');
         messageElement.className = `message ${msg.sender === 'Véronica' ? 'outgoing' : 'incoming'}`;
-        
+        messageDetails.style.display = 'block';
+
         // Profile image, name, timestamp, and content
         if (msg.sender !== 'Véronica') {
             const profileImage = document.createElement('img');
