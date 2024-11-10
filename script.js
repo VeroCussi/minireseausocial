@@ -344,12 +344,12 @@ function sendMessage(conversation, content) {
 
 
 
-// Friends list
+// Friends Section
 const friendsData = [
-    { name: "Alice Dupont" },
-    { name: "Jean Martin" },
-    { name: "Marie Curie" },
-    { name: "Pierre Lafont" }
+    { name: "Alice Dupont", profileImage: "images/alice.jpg" },
+    { name: "Jean Martin", profileImage: "images/jean.jpg" },
+    { name: "Marie Curie", profileImage: "images/avatar.jpg" },
+    { name: "Pierre Lafont", profileImage: "images/default.jpg" }
 ];
 
 // Load friends into the friend list
@@ -358,15 +358,34 @@ function loadFriends() {
     friendsData.forEach(friend => {
         const friendItem = document.createElement('li');
         friendItem.className = 'friend-item';
-        friendItem.textContent = friend.name;
+
+        // Create profile image element
+        const profileImage = document.createElement('img');
+        profileImage.src = friend.profileImage ? friend.profileImage : 'images/default.jpg';
+        profileImage.className = 'friend-profile-pic';
+
+        // Friend name and message link
+        const friendDetails = document.createElement('div');
+        friendDetails.className = 'friend-details';
+        friendDetails.textContent = friend.name;
 
         // Link to messaging page
         const messageLink = document.createElement('a');
-        messageLink.href = '#messagerie';
+        messageLink.href = '#';
         messageLink.className = 'friend-link';
         messageLink.textContent = 'Message';
-        friendItem.appendChild(messageLink);
 
+        // Event to load the messaging section and open the conversation
+        messageLink.addEventListener('click', (event) => {
+            event.preventDefault();
+            document.querySelector('#messagerie').classList.add('active');
+            document.querySelector('#amis').classList.remove('active');
+            loadConversationByName(friend.name);
+        });
+
+        friendItem.appendChild(profileImage); 
+        friendItem.appendChild(friendDetails);
+        friendItem.appendChild(messageLink);
         friendList.appendChild(friendItem);
 
         // Enable drag-and-drop functionality
@@ -375,6 +394,43 @@ function loadFriends() {
         friendItem.addEventListener('dragover', handleDragOver);
         friendItem.addEventListener('drop', handleDrop);
     });
+}
+
+// Load conversation by friend name, show invitation message if no conversation exists
+function loadConversationByName(name) {
+    const messageDetails = document.querySelector('.message-details');
+    const conversation = conversationsData.find(conv => conv.name === name);
+    
+    if (conversation) {
+        // If conversation exists, load the conversation history
+        loadConversationHistory(conversation);
+    } else {
+        // If no conversation exists, show invitation message
+        messageDetails.style.display = 'block';
+        messageDetails.innerHTML = `<p>Tu n'as pas de conversation avec ${name}. Envoie-lui un message!</p>`;
+        
+        // Option to start a new conversation
+        const startMessageButton = document.createElement('button');
+        startMessageButton.textContent = `Envoyer un message à ${name}`;
+        startMessageButton.className = 'start-message-button';
+        startMessageButton.addEventListener('click', () => {
+            startNewConversation(name);
+        });
+        
+        messageDetails.appendChild(startMessageButton);
+    }
+}
+
+// Function to start a new conversation with a friend
+function startNewConversation(name) {
+    const newConversation = {
+        id: conversationsData.length + 1,
+        name: name,
+        profileImage: "images/default.jpg",
+        messages: []
+    };
+    conversationsData.push(newConversation); // Add to conversationsData
+    loadConversationHistory(newConversation); // Load the new, empty conversation
 }
 
 // Filter friends by search input
@@ -390,6 +446,7 @@ let draggedFriend = null;
 
 function handleDragStart(event) {
     draggedFriend = event.target;
+    draggedFriend.classList.add('dragging');
 }
 
 function handleDragOver(event) {
@@ -402,4 +459,5 @@ function handleDrop(event) {
         const friendList = document.getElementById('friend-list');
         friendList.insertBefore(draggedFriend, this);
     }
+    draggedFriend.classList.remove('dragging');
 }
